@@ -1,6 +1,10 @@
 # gs-framework
 
 框架实现主要流程
+=====
+
+实现一个容器
+____
 
 
 1. 通过 ConfigHelper 读取应用程序 application.properties配置文件信息，配置文件包含DB，扫描类路径，JSP路径等，用到PropsUtil获取属性文件
