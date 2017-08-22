@@ -3,8 +3,8 @@
 框架实现主要流程
 =====
 
-实现一个容器
-____
+实现一个BEAN容器
+-----
 
 
 1. 通过 ConfigHelper 读取应用程序 application.properties配置文件信息，配置文件包含DB，扫描类路径，JSP路径等，用到PropsUtil获取属性文件
@@ -19,6 +19,7 @@ ____
 
 这里Bean MAP 类似一个 “bean 容器”，里面有bean类和bean实例关系，只要调用getBean 方法就可以获取Bean 实例。
 
-
-6.
+实现依赖注入
+----
+1 .
 
