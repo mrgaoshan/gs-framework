@@ -21,5 +21,6 @@
 
 实现依赖注入
 ----
-1 .
+1 .建立Iochelp 类，通过BeanHelper获取到所有 controller 和server 注解的 beanMap, 循环beanMap, 获取当前注解有@Inject成员变量的类，
+通过beanMap 得到 带有inject 成员变量的实例， 通过ReflectUtils 设置当前类 inject成员变量的值，
 
