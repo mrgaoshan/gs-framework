@@ -21,9 +21,31 @@
 
 实现依赖注入
 ----
-1 .建立Iochelp 类，通过BeanHelper获取到所有 controller 和server 注解的 beanMap, 循环beanMap, 
+1 .建立Iochelper 类，通过BeanHelper获取到所有 controller 和server 注解的 beanMap, 循环beanMap, 
 获取当前注解有@Inject成员变量的类，
 通过beanMap 得到 带有@inject 成员变量的实例， 通过ReflectUtils 设置当前类 @inject成员变量的值
 
 此时的IOChelp 需要在一个地方初始化，已达到成员变量值依赖注入
+
+
+建立请求地址RequestMapping与Handler 映射关系
+----
+
+1. 建立ControllerHelper通过ClassHelper 获取到所有control注解的class， 然后找到带有@RquestMapping 注解的方法， 封装RequstMapping url ，和 当前对应的所在类和所在的方法，放入一个ReqestMap<UrlObJect, Handdler> 中。
+
+初始化框架
+----
+
+ClassHelper -- 获取包下所有 带有 controller 和service 注解的类 class
+
+BeanHelper -- bean 容器
+
+Iochelper -- 依赖注入
+
+ControllerHelper  -- 请求URL与 Method ，controller 对应关系
+
+应为初始内容都是静态块，所以需要在一地方集中初始化话，只需要调用class.forName ，已达到框架的初始化
+
+
+
 
