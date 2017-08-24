@@ -47,5 +47,11 @@ ControllerHelper  -- 请求URL与 Method ，controller 对应关系
 应为初始内容都是静态块，所以需要在一地方集中初始化话，只需要调用class.forName ，已达到框架的初始化
 
 
+DispatcherServlet 请求转发器实现
+----
+
+
+
+
 
 
