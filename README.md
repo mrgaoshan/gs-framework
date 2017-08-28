@@ -60,6 +60,12 @@ DispatcherServlet 请求转发器实现
 把 /ico, /asset/* 下的文件 交给 org.apache.catalina.servlets.DefaultServlet 处理
 
 
+5. 重写service 方法， ControllerHelper.getHandler 获取 请求http 映射到 哪一个类，哪一个方法
+
+6. 实例化类，通过反射调用类方法，并返回调用结果对象 view ,data ,页面还是json。
+
+7 返回结果
+
 
 
 
