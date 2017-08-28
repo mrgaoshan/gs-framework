@@ -44,12 +44,12 @@ public class DispatcherServlet extends HttpServlet {
 
     //todo
     private void registerServlet(ServletContext servletContext) {
-        //注册jsp的servlet
+        //注册jsp的servlet,把 index.jsp, ./WEB-INF/View/* 下的jsp交给 org.apache.jasper.servlet.JspServlet  处理
         ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
-        jspServlet.addMapping("/index.jsp");
+        jspServlet.addMapping(              "/index.jsp");
         jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
 
-        //注册处理静态资源的servlet
+        //注册处理静态资源的servlet，把 /ico, /asset/* 下的文件 交给 org.apache.catalina.servlets.DefaultServlet 处理
         ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
         defaultServlet.addMapping("/favicon.ico");
         defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
