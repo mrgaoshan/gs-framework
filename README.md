@@ -50,6 +50,15 @@ ControllerHelper  -- 请求URL与 Method ，controller 对应关系
 DispatcherServlet 请求转发器实现
 ----
 
+1.新建 DispatcherServlet 继承 HttpServlet  加入注解@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+
+2. 表示每个请求 都经过改servlet ，loadOnStartup 数字越小优先级越高
+
+3. 重写init 方法，在该方法加载时 就通过LoaderHelper.init() 初始化 helper 类
+
+4.初始化 jsp 和 静态资源路径，把 index.jsp, ./WEB-INF/View/* 下的jsp交给 org.apache.jasper.servlet.JspServlet  处理
+把 /ico, /asset/* 下的文件 交给 org.apache.catalina.servlets.DefaultServlet 处理
+
 
 
 
