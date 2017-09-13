@@ -25,7 +25,7 @@
 
 通过BeanHelper获取到所有 controller 和server 注解的 Class 集合，循环class 集合，通过 class.newInstance 创建class 实例，放入 beanMap<Class<?>, ClassInstance> 
 
-2. 建立IOChelpe类， 
+2. 建立IOChelper类， 
 
 循环beanMap, 获取类里面注解有@Inject成员变量的类(beanFieldClass)，  如：@Inject XXXXservice 
 
@@ -36,10 +36,19 @@
 此时的IOChelper 需要在一个地方初始化
 
 
-建立请求地址RequestMapping与Handler 映射关系
+建立请求地址RequestMapping与Handler 映射关系 
 ----
+#### （请求URL映射到哪一个controller和哪一个方法）
 
-1. 建立ControllerHelper通过ClassHelper 获取到所有control注解的class， 然后找到带有@RquestMapping 注解的方法， 封装RequstMapping url ，和 当前对应的所在类和所在的方法，放入一个ReqestMap<UrlObJect, Handdler> 中。
+1. 建立ControllerHelper 
+
+通过ClassHelper 获取到所有control注解的class 
+
+循环class的方法，找到带有@RquestMapping 注解的方法， 封装RequstMapping定义url，请求URL和请求类型，放到UrlObJect对象
+
+把 当前类 和当前方法放入 Handdler对象 
+
+放入RequestMap<UrlObJect, Handdler> 中,从而建立了URL 和 Contoller 映射关系
 
 初始化框架
 ----
