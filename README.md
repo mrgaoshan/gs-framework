@@ -96,8 +96,11 @@ DispatcherServlet 请求转发器实现与初始化
 
 ## 框架加入AOP功能
 
-实现AOP 主要是通过CGLIB 动态代理试下的，一下是一个简单的CGLIB 动态代理 例子
-   public class CglibProxy implements MethodInterceptor {  
+实现AOP 主要是通过CGLIB 动态代理试下的，一下是一个简单的CGLIB 动态代理 例子 
+
+
+   public class CglibProxy implements MethodInterceptor { 
+   
        private Object target;    
          
       public Object getProxyInstance(Object target) {    
