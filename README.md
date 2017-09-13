@@ -50,18 +50,21 @@
 
 放入RequestMap<UrlObJect, Handdler> 中,从而建立了URL 和 Contoller 映射关系
 
-初始化框架
+框架的初始化
 ----
+##### 建立 LoaderHelper 来做统一初始化入口 
 
-ClassHelper -- 获取包下所有 带有 controller 和service 注解的类 class
+通过以上步骤，我们建立了： 
 
-BeanHelper -- bean 容器
+ClassHelper -- 获取包下所有 带有 controller 和service 注解的类 class Helper
 
-Iochelper -- 依赖注入
+BeanHelper -- bean 容器 Helper
 
-ControllerHelper  -- 请求URL与 Method ，controller 对应关系
+Iochelper -- 依赖注入Helper
 
-应为初始内容都是静态块，所以需要在一地方集中初始化话，只需要调用class.forName ，已达到框架的初始化
+ControllerHelper  -- 请求URL与 Method ，controller 对应关系 Helper
+
+因为初始的内容都放到静态块中的，所以需要在一个地方集中初始化话，只需要调用class.forName ，已达到框架的初始化
 
 
 DispatcherServlet 请求转发器实现
