@@ -118,5 +118,19 @@ DispatcherServlet 请求转发器实现与初始化
           System.out.println("after target method...");  
            return result;  
       }  
+      
+      通过 传入 Enhancer 传入 代理对象，代理的intercept， 调用enhancer.create() 
+      如 ： 
+      CglibProxy proxy = new CglibProxy(); 
+      
+      Hello hello = (Hello) proxy.getProxyInstance(new HelloImpl()); 
+      
+      UserDaoImpl userDao = (UserDaoImpl) proxy.getProxyInstance(new UserDaoImpl()
+      
+      
+  了解Cglib后，开始实现AOP 功能
+  
+  
+  1.
 
 
