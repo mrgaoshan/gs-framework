@@ -67,24 +67,32 @@ ControllerHelper  -- 请求URL与 Method ，controller 对应关系 Helper
 因为初始的内容都放到静态块中的，所以需要在一个地方集中初始化话，只需要调用class.forName ，已达到框架的初始化
 
 
-DispatcherServlet 请求转发器实现
+DispatcherServlet 请求转发器实现与初始化
 ----
 
-1.新建 DispatcherServlet 继承 HttpServlet  加入注解@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+1.新建 DispatcherServlet 继承 HttpServlet  加入注解@WebServlet(urlPatterns = "/*", loadOnStartup = 0) 
 
-2. 表示每个请求 都经过改servlet ，loadOnStartup 数字越小优先级越高
+表示每个请求 都经过改servlet ，loadOnStartup 数字越小优先级越高
 
-3. 重写init 方法，在该方法加载时 就通过LoaderHelper.init() 初始化 helper 类
+2.重写init 方法，在该方法加载时 就通过LoaderHelper.init() 初始化 helper 类
 
-4.初始化 jsp 和 静态资源路径，把 index.jsp, ./WEB-INF/View/* 下的jsp交给 org.apache.jasper.servlet.JspServlet  处理
-把 /ico, /asset/* 下的文件 交给 org.apache.catalina.servlets.DefaultServlet 处理
+3.初始化 jsp 和 静态资源路径，把 index.jsp, ./WEB-INF/View/* 下的jsp交给 org.apache.jasper.servlet.JspServlet 处理 
+
+把 /ico, /asset/* 下的静态文件 交给 org.apache.catalina.servlets.DefaultServlet 处理 
+
+所以其他请求的URL 都会 经过重写的Service 方法，进入我们框架处理
+
+4.重写service 方法， ControllerHelper.getHandler 获取 请求http 映射到 哪一个类(controllerBeanClass)，哪一个方法(actionMethod)
+
+5.实例化类，通过Bean Map 获取到（controllerBean） 
+
+6.通过反射调用类方法 ( result = actionMethod.invoke(controllerBean, args))   并返回调用结果 (result)
+ 
+7. 根据返回的 result 是View 还是 Data类型 , 返回页面  request.getRequestDispatcher 或   PrintWriter writer = response.getWriter() 写入 json。
 
 
-5. 重写service 方法， ControllerHelper.getHandler 获取 请求http 映射到 哪一个类，哪一个方法
+### 8. 至此，实现了简单的Web 框架
 
-6. 实例化类，通过反射调用类方法，并返回调用结果对象 view ,data ,页面还是json。
-
-7 返回结果
 
 
 
