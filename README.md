@@ -21,15 +21,19 @@
 
 实现依赖注入
 ----
-1 .建立Iochelper 类， 
+1 .建立BeanHelper类， 
 
-通过BeanHelper获取到所有 controller 和server 注解的 Class 集合，循环class 集合，通过 class.newInstance 创建class 实例，放入 beanMap 
+通过BeanHelper获取到所有 controller 和server 注解的 Class 集合，循环class 集合，通过 class.newInstance 创建class 实例，放入 beanMap<Class<?>, ClassInstance> 
 
-循环beanMap, 
-获取当前注解有@Inject成员变量的类，
-通过beanMap 得到 带有@inject 成员变量的实例， 通过ReflectUtils 设置当前类 @inject成员变量的值
+2. 建立IOChelpe类， 
 
-此时的IOChelp 需要在一个地方初始化，已达到成员变量值依赖注入
+循环beanMap, 获取类里面注解有@Inject成员变量的类(beanFieldClass)，  如：@Inject XXXXservice 
+
+通过beanMap 得到 带有@inject 成员变量的实例(beanFieldInstance), 
+
+通过ReflectUtils 设置当前类 @inject成员变量的值 (ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance)),从而实现依赖注入
+
+此时的IOChelper 需要在一个地方初始化
 
 
 建立请求地址RequestMapping与Handler 映射关系
