@@ -98,7 +98,6 @@ DispatcherServlet 请求转发器实现与初始化
 
 实现AOP 主要是通过CGLIB 动态代理试下的，一下是一个简单的CGLIB 动态代理 例子 
 
-
    public class CglibProxy implements MethodInterceptor { 
    
        private Object target;    
@@ -120,8 +119,9 @@ DispatcherServlet 请求转发器实现与初始化
       }  
       
       通过 传入 Enhancer 传入 代理对象，代理的intercept， 调用enhancer.create() 
-      如 ： 
-      CglibProxy proxy = new CglibProxy(); 
+      如 : 
+      
+      CglibProxy proxy = new CglibProxy(); 
       
       Hello hello = (Hello) proxy.getProxyInstance(new HelloImpl()); 
       
@@ -130,7 +130,7 @@ DispatcherServlet 请求转发器实现与初始化
       
   了解Cglib后，开始实现AOP 功能
   
-  
+
   1.
 
 
