@@ -94,7 +94,26 @@ DispatcherServlet 请求转发器实现与初始化
 ### 8. 至此，实现了简单的Web 框架
 
 
+## 框架加入AOP功能
 
-
+实现AOP 主要是通过CGLIB 动态代理试下的，一下是一个简单的CGLIB 动态代理 例子
+   public class CglibProxy implements MethodInterceptor {  
+       private Object target;    
+         
+      public Object getProxyInstance(Object target) {    
+           this.target = target;  
+           Enhancer enhancer = new Enhancer();    
+          enhancer.setSuperclass(this.target.getClass());    
+          enhancer.setCallback(this);  // call back method  
+          return enhancer.create();  // create proxy instance  
+       }    
+         
+     @Override  
+       public Object intercept(Object target, Method method, Object[] args, MethodProxy proxy) throws Throwable {  
+          System.out.println("before target method...");  
+          Object result = proxy.invokeSuper(target, args);  
+          System.out.println("after target method...");  
+           return result;  
+      }  
 
 
