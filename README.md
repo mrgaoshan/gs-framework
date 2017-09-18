@@ -131,6 +131,16 @@ DispatcherServlet 请求转发器实现与初始化
   了解Cglib后，开始实现AOP 功能
   
 
-  1.
+  1. 获取所有扩展了有 抽象代理AspectProxy类 的代理类  Set<Class<?>>
+  2. 并且该类带有注解@Aspect ，获取aspect 的value 如 “@Controller” 放入 Map<Class<?>, Set<Class<?>>> proxyMap 中，
+   
+   一个代理类 可以对应多个目标类，如 ：MAP ("class com.gs.demo1.aspect.ControllerAspect", "set<list> com.gs.demo1.controller.CustomerController 
+ 
+ 3. 根据 上面的 proxyMap，获取一个类的所有代理类   Map<Class<?>, List<Proxy>> targetMap 
+ 
+ 通过 循环 proxyMap ， Proxy proxy = (Proxy) proxyClass.newInstance();  实例出代理对象，放入 对应的calss 的 targetMap 中
 
+4. 通过cglib 动态代理 ，通过 targetMap 循环创建代理对象，  如 ：customerConrollerEnhancer$CGLIB 
+
+5. 通过 beanHelper 设置到 beanMap 中 ，BEAN_MAP.put(cls, obj);  class ：该类，obj ：customerConrollerEnhancer$CGLIB 
 
