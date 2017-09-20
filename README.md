@@ -144,3 +144,11 @@ DispatcherServlet 请求转发器实现与初始化
 
 5. 通过 beanHelper 设置到 beanMap 中 ，BEAN_MAP.put(cls, obj);  class ：该类，obj ：customerConrollerEnhancer$CGLIB 
 
+
+
+## 框架加入事物控制
+### 实现思路，通过封装jdbc的事物的提交，通过aop 在有注解为@Transaction 的方法 通过cglib 动态代理实现
+
+1.添加 databaseHelper类，封装了jdbc的开启事物，提交事物，回滚事物等方法
+2.编写事物切面类，TrasactionPorxy ，就是编写事物代理类，如果方法带有transcation，就执行事物。
+3.在AOPHelper 中加入 新方法，添加带有@Trasaction的 类 到 proxyMap中
